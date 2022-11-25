@@ -4,29 +4,36 @@
             xsi:schemaLocation="http://jboss.org/schema/arquillian http://www.jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <!-- Sets the protocol which is how Arquillian talks and executes the tests inside the container -->
     <defaultProtocol type="Servlet 5.0"/>
-    <!-- Configuration to be used when the WidlFly remote profile is active -->
-    <container qualifier="widlfly-remote">
-        <configuration>
-            <property name="managementAddress">127.0.0.1</property>
-            <property name="managementPort">9990</property>
-            <property name="username">admin</property>
-            <property name="password">admin</property>
-        </configuration>
-    </container>
-
-
-    <container qualifier="widlfly-managed" default="true">
-        <configuration>
-            <!--<property name="jbossHome">D:\workspace\servers\wildfly-24.0.1.Final</property>-->
-<!--            <property name="allowConnectingToRunningServer">true</property>-->
-            <property name="javaVmArguments">-Xmx1024m -XX:MaxPermSize=2048m</property>
-        </configuration>
-    </container>
     <extension qualifier="persistence">
         <property name="defaultDataSource">java:jboss/datasources/ExampleDS</property>
     </extension>
     <extension qualifier="persistence-dbunit">
-<!--        <property name="datatypeFactory">org.dbunit.ext.mssql.MsSqlDataTypeFactory</property>-->
+        <!--        <property name="datatypeFactory">org.dbunit.ext.mssql.MsSqlDataTypeFactory</property>-->
     </extension>
 
+    <!-- Configuration to be used when the WidlFly remote profile is active -->
+    <container qualifier="wildfly-remote">
+        <configuration>
+            <property name="managementAddress">127.0.0.1</property>
+            <property name="managementPort">9990</property>
+            <property name="protocol">http-remoting</property>
+            <property name="username">admin</property>
+            <property name="password">Admin@123</property>
+        </configuration>
+    </container>
+
+    <!-- Configuration to be used when the WildFly managed profile is active -->
+    <container qualifier="wildfly-managed">
+        <configuration>
+            <!--<property name="jbossHome">${jbossHome:target/wildfly-18.0.1.Final}</property>-->
+            <property name="serverConfig">standalone-full.xml</property>
+        </configuration>
+    </container>
+
+    <container qualifier="wildfly-embedded">
+        <configuration>
+            <!--<property name="jbossHome">${jbossHome:target/wildfly-18.0.1.Final}</property>-->
+            <property name="serverConfig">standalone-full.xml</property>
+        </configuration>
+    </container>
 </arquillian>
