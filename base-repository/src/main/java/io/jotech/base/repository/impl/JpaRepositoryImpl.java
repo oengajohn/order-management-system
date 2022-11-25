@@ -2,21 +2,20 @@ package io.jotech.base.repository.impl;
 
 import java.util.List;
 import java.util.stream.Stream;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 
-import static javax.transaction.Transactional.TxType.REQUIRED;
+import static jakarta.transaction.Transactional.TxType.REQUIRED;
+import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 import io.jotech.base.repository.JpaRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 
 
-@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+@Transactional(SUPPORTS)
 public abstract class JpaRepositoryImpl<T, ID> implements JpaRepository<T, ID> {
     private final Class<T> entityClass;
 

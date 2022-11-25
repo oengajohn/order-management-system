@@ -1,14 +1,14 @@
 package io.jotech.classicmodels.entity;
 
 import java.io.Serializable;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.persistence.Entity;
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.persistence.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

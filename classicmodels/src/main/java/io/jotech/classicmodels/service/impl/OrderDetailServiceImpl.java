@@ -1,7 +1,7 @@
 package io.jotech.classicmodels.service.impl;
 
 import java.util.List;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import io.jotech.classicmodels.entity.OrderDetail;
 import io.jotech.classicmodels.repository.OrderDetailRepository;

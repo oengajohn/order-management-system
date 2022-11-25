@@ -1,8 +1,6 @@
 package io.jotech.classicmodels.rest;
 
 import java.net.URL;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -24,6 +22,8 @@ import static org.hamcrest.Matchers.startsWith;
 import io.jotech.classicmodels.entity.Office;
 import io.jotech.classicmodels.util.ArquillianWarUtils;
 import io.jotech.classicmodels.vm.FormResponse;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 
 @ExtendWith(ArquillianExtension.class)

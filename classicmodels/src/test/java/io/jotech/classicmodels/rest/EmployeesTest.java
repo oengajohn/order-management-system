@@ -1,8 +1,6 @@
 package io.jotech.classicmodels.rest;
 
 import java.net.URL;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -16,6 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThan;
 import io.jotech.classicmodels.util.ArquillianWarUtils;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @ExtendWith(ArquillianExtension.class)
 public class EmployeesTest {
