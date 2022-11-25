@@ -308,12 +308,12 @@
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-        </testResources>
+<!--        <testResources>-->
+<!--            <testResource>-->
+<!--                <directory>src/test/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--            </testResource>-->
+<!--        </testResources>-->
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -383,7 +383,7 @@
                         </goals>
                         <configuration>
                             <excludes>
-<!--                                <exclude>**/it/**</exclude>-->
+                                <exclude>**/it/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -406,7 +406,7 @@
                         </goals>
                         <configuration>
                             <includes>
-<!--                                <include>**/it/**</include>-->
+                                <include>**/it/**</include>
                             </includes>
                         </configuration>
                     </execution>
@@ -587,7 +587,7 @@
                 <dependency>
                     <groupId>org.jboss.remoting</groupId>
                     <artifactId>jboss-remoting</artifactId>
-                    <version>5.0.25.Final</version>
+                    <version>5.0.26.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
