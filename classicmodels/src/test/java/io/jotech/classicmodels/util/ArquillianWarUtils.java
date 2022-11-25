@@ -28,7 +28,6 @@ public class ArquillianWarUtils {
         return ShrinkWrap.create(WebArchive.class, deploymentName==null?"test.war":deploymentName)
                 .addAsLibraries(ASSERTJ_ARTIFACT)
                 .addAsLibraries(EXPRESSION_PARSER)
-                .addPackages(true,"io.jotech.javaee8starter.entity")//add all models
                 .addAsLibraries(REST_ASSURED)
                 .addAsWebInfResource("beans.xml")
                 .addAsResource("META-INF/sql/insert.sql")
