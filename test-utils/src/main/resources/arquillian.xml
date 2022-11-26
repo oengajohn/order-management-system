@@ -27,8 +27,9 @@
     </container>
 
     <!-- Configuration to be used when the WildFly managed profile is active -->
-    <container qualifier="wildfly-managed" default="true">
+    <container qualifier="wildfly-managed">
         <configuration>
+            <property name="jbossHome">${jbossHome:target/wildfly-27.0.0.Final}</property>
 <!--           <property name="allowConnectingToRunningServer">true</property>-->
             <property name="javaVmArguments">-Xmx1024m -XX:MaxPermSize=2048m</property>
             <property name="serverConfig">standalone-full.xml</property>
