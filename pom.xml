@@ -63,6 +63,7 @@
         <wildfly-maven-plugin.version>3.0.2.Final</wildfly-maven-plugin.version>
         <wildfly-arquillian.version>5.0.0.Alpha6</wildfly-arquillian.version>
         <wildfly-jar-maven-plugin.version>8.0.0.Final</wildfly-jar-maven-plugin.version>
+
         <!-- websockets-jsr and resteasy for client, aligned with Wildfly version. -->
         <undertow-websockets-jsr.version>2.2.17.Final</undertow-websockets-jsr.version>
         <resteasy.version>6.0.1.Final</resteasy.version>
@@ -308,12 +309,7 @@
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
-<!--        <testResources>-->
-<!--            <testResource>-->
-<!--                <directory>src/test/resources</directory>-->
-<!--                <filtering>true</filtering>-->
-<!--            </testResource>-->
-<!--        </testResources>-->
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -363,9 +359,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <attachClasses>true</attachClasses>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -489,6 +482,36 @@
             </build>
         </profile>
         <profile>
+            <id>wildfly-bootable</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-jar-maven-plugin</artifactId>
+                        <version>${wildfly-jar-maven-plugin.version}</version>
+                        <configuration>
+                            <feature-pack-location>
+                                wildfly-preview@maven(org.jboss.universe:community-universe)#${wildfly.version}
+                            </feature-pack-location>
+                            <layers>
+                                <layer>jaxrs</layer>
+                            </layers>
+                            <plugin-options>
+                                <jboss-fork-embedded>true</jboss-fork-embedded>
+                            </plugin-options>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
 
             <!-- An optional Arquillian testing profile that executes tests in your
                 WildFly instance -->
@@ -497,12 +520,30 @@
             <!-- Run with: mvn clean verify -Parq-wildfly-managed -->
             <id>arq-wildfly-managed</id>
             <properties>
-                <skip.unit.tests>false</skip.unit.tests>
+                <skip.unit.tests>true</skip.unit.tests>
                 <skip.integration.tests>false</skip.integration.tests>
                 <serverProfile>standalone-full.xml</serverProfile>
                 <serverRoot>${project.build.directory}/wildfly-${wildfly.version}</serverRoot>
             </properties>
             <dependencies>
+
+                <!-- TESTS -->
+                <!-- JAXRS test need the dependency:resteasy-client -->
+                <!-- Import the RestEasy Client and jackson2/json-binding/json-p provider, we use test scope
+                    as we need that for test purposes -->
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-client</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jackson2-provider</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
                 <dependency>
                     <groupId>org.wildfly.arquillian</groupId>
                     <artifactId>wildfly-arquillian-container-managed</artifactId>
@@ -575,6 +616,20 @@
             </properties>
             <dependencies>
                 <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-client</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jackson2-provider</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+
+                <dependency>
                     <groupId>org.wildfly.arquillian</groupId>
                     <artifactId>wildfly-arquillian-container-remote</artifactId>
                     <version>${wildfly-arquillian.version}</version>
@@ -623,11 +678,22 @@
             <!-- Run with: mvn clean test -Parq-wildfly-embedded -->
             <id>arq-wildfly-embedded</id>
             <properties>
-                <skip.unit.tests>false</skip.unit.tests>
+                <skip.unit.tests>true</skip.unit.tests>
                 <skip.integration.tests>false</skip.integration.tests>
             </properties>
             <dependencies>
-
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-client</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jackson2-provider</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
 
 
                 <dependency>
@@ -699,6 +765,19 @@
             </properties>
             <dependencies>
                 <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-client</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jackson2-provider</artifactId>
+                    <version>${resteasy.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
                     <groupId>org.wildfly.arquillian</groupId>
                     <artifactId>wildfly-arquillian-container-bootable</artifactId>
                     <version>${wildfly-arquillian.version}</version>
@@ -757,6 +836,7 @@
                 </plugins>
             </build>
         </profile>
+
     </profiles>
     <issueManagement>
         <system>Github Issues</system>

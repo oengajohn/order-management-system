@@ -4,13 +4,17 @@
             xsi:schemaLocation="http://jboss.org/schema/arquillian http://www.jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <!-- Sets the protocol which is how Arquillian talks and executes the tests inside the container -->
     <defaultProtocol type="Servlet 5.0"/>
-    <extension qualifier="persistence">
-        <property name="defaultDataSource">java:jboss/datasources/ExampleDS</property>
-    </extension>
-    <extension qualifier="persistence-dbunit">
-        <!--        <property name="datatypeFactory">org.dbunit.ext.mssql.MsSqlDataTypeFactory</property>-->
-    </extension>
 
+    <engine>
+        <property name="deploymentExportPath">target/</property>
+    </engine>
+    <!-- Configuration to be used when the WidlFly remote profile is active -->
+    <container qualifier="wildfly-embedded">
+        <configuration>
+            <!--<property name="jbossHome">${jbossHome:target/wildfly-18.0.1.Final}</property>-->
+            <property name="serverConfig">standalone-full.xml</property>
+        </configuration>
+    </container>
     <!-- Configuration to be used when the WidlFly remote profile is active -->
     <container qualifier="wildfly-remote">
         <configuration>
@@ -18,22 +22,17 @@
             <property name="managementPort">9990</property>
             <property name="protocol">http-remoting</property>
             <property name="username">admin</property>
-            <property name="password">Admin@123</property>
+            <property name="password">admin</property>
         </configuration>
     </container>
 
     <!-- Configuration to be used when the WildFly managed profile is active -->
-    <container qualifier="wildfly-managed">
+    <container qualifier="wildfly-managed" default="true">
         <configuration>
-            <!--<property name="jbossHome">${jbossHome:target/wildfly-18.0.1.Final}</property>-->
+<!--           <property name="allowConnectingToRunningServer">true</property>-->
+            <property name="javaVmArguments">-Xmx1024m -XX:MaxPermSize=2048m</property>
             <property name="serverConfig">standalone-full.xml</property>
         </configuration>
     </container>
 
-    <container qualifier="wildfly-embedded">
-        <configuration>
-            <!--<property name="jbossHome">${jbossHome:target/wildfly-18.0.1.Final}</property>-->
-            <property name="serverConfig">standalone-full.xml</property>
-        </configuration>
-    </container>
 </arquillian>
