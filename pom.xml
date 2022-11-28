@@ -11,6 +11,7 @@
         <module>classicmodels</module>
         <module>base-repository</module>
         <module>test-utils</module>
+        <module>sakila</module>
 
     </modules>
     <name>starter-template</name>
@@ -520,7 +521,7 @@
             <!-- Run with: mvn clean verify -Parq-wildfly-managed -->
             <id>arq-wildfly-managed</id>
             <properties>
-                <skip.unit.tests>true</skip.unit.tests>
+                <skip.unit.tests>false</skip.unit.tests>
                 <skip.integration.tests>false</skip.integration.tests>
                 <serverProfile>standalone-full.xml</serverProfile>
                 <serverRoot>${project.build.directory}/wildfly-${wildfly.version}</serverRoot>
@@ -592,9 +593,9 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>${maven-failsafe-plugin.version}</version>
                         <configuration>
-                            <environmentVariables>
-                                <JBOSS_HOME>${project.build.directory}/wildfly-preview-${wildfly.version}</JBOSS_HOME>
-                            </environmentVariables>
+<!--                            <environmentVariables>-->
+<!--                                <JBOSS_HOME>${project.build.directory}/wildfly-preview-${wildfly.version}</JBOSS_HOME>-->
+<!--                            </environmentVariables>-->
                             <systemPropertyVariables>
                                 <arquillian.launch>wildfly-managed</arquillian.launch>
                                 <serverConfig>standalone-full.xml</serverConfig>
