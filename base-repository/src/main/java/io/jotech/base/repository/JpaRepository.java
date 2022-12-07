@@ -10,7 +10,7 @@ public interface JpaRepository<T,ID>  extends Repository<T, ID>{
     T read(ID id);
     T update(T entity);
     boolean delete(T entity);
-    List<T> listAll();
+    List<T> listAll(Integer start,Integer limit);
     Stream<T> streamAll();
 
     boolean deleteById(ID id);

@@ -13,8 +13,8 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public List<Customer> getAllCustomers() {
-        return customerRepository.listAll();
+    public List<Customer> getAllCustomers(Integer start, Integer limit) {
+        return customerRepository.listAll(start,limit);
 
     }
 

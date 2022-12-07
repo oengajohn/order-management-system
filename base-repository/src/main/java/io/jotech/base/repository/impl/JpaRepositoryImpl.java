@@ -62,10 +62,14 @@ public abstract class JpaRepositoryImpl<T, ID> implements JpaRepository<T, ID> {
     }
 
     @Override
-    public List<T> listAll() {
+    public List<T> listAll(Integer start,Integer limit) {
         CriteriaQuery<T> cq = getEntityManager().getCriteriaBuilder().createQuery(entityClass);
         cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+
+        TypedQuery<T> query = getEntityManager().createQuery(cq);
+        query.setFirstResult(start);
+        query.setMaxResults(limit);
+        return query.getResultList();
     }
 
     @Override
