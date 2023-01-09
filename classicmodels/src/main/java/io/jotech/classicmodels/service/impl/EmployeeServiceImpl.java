@@ -13,7 +13,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.listAll();
+    public List<Employee> getAllEmployees(Integer start, Integer limit) {
+        return employeeRepository.listAll(start,limit);
     }
 }
