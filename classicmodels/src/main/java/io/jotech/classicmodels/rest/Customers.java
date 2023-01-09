@@ -28,7 +28,7 @@ import io.jotech.classicmodels.vm.GridResponse;
 public class Customers {
     @Inject
     private CustomerService customerService;
-    88y77yt
+
 
     @GET
     public Response getAllCustomers(
