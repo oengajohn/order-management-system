@@ -1,19 +1,18 @@
 pipeline {
     agent any
+    tools{
+        maven 'Maven-3.8.7'
+    }
     stages {
         stage('Build') {
             steps {
-                withMaven(maven: 'Maven-3.8.7',){
-                    sh 'mvn -B -DskipTests clean package'
-                }
+               sh 'mvn -B -DskipTests clean package'
 
             }
         }
         stage('Test') {
             steps {
-                withMaven(maven: 'Maven-3.8.7',){
-                    sh 'mvn test'
-                }
+                sh 'mvn test'
             }
             post {
                 always {
