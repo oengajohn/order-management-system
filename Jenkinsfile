@@ -1,23 +1,30 @@
-pipeline{
-    agent any
-    stages{
-        stage("build"){
-            steps{
-                echo("building the application")
-                mvn clean compile
-
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.8.7-eclipse-temurin-11'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage("test"){
-            steps{
-                echo("testing the application")
-                 mvn clean test
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
             }
         }
-        stage("deploy"){
-            steps{
-                echo("deploying the application")
-               mvn clean package
+        stage('Deliver') {
+            steps {
+                // sh './jenkins/scripts/deliver.sh'
+                echo "Delivering "
             }
         }
     }
