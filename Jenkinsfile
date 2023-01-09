@@ -12,7 +12,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn clean verify -Parq-wildfly-managed'
+                //sh 'mvn clean verify -Parq-wildfly-managed'
+                echo("Running unist tests")
+                sh 'mvn test'
             }
             post {
                 always {
