@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn clean verify -Parq-wildfly-managed'
             }
             post {
                 always {
