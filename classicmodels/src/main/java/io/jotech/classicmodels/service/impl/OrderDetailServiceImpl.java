@@ -13,7 +13,7 @@ public class OrderDetailServiceImpl implements io.jotech.classicmodels.service.O
     private OrderDetailRepository orderDetailRepository;
 
     @Override
-    public List<OrderDetail> getAllOrderDetails() {
-        return orderDetailRepository.listAll();
+    public List<OrderDetail> getAllOrderDetails(Integer start, Integer limit) {
+        return orderDetailRepository.listAll(start, limit);
     }
 }

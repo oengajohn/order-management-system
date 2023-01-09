@@ -13,8 +13,8 @@ public class OfficeServiceImpl implements OfficeService {
     private OfficeRepository officeRepository;
 
     @Override
-    public List<Office> getAllOffices() {
-        return officeRepository.listAll();
+    public List<Office> getAllOffices(Integer start, Integer limit) {
+        return officeRepository.listAll(start,limit);
     }
 
     @Override

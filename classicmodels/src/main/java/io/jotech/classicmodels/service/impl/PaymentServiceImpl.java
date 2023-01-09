@@ -12,7 +12,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Inject
     private PaymentRepository paymentRepository;
     @Override
-    public List<Payment> getAllPayments() {
-        return paymentRepository.listAll();
+    public List<Payment> getAllPayments(Integer start, Integer limit) {
+        return paymentRepository.listAll(start, limit);
     }
 }

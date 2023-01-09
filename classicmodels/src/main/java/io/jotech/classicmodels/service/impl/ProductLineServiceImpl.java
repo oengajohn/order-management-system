@@ -12,7 +12,7 @@ public class ProductLineServiceImpl implements ProductLineService {
     @Inject
     private ProductLineRepository productLineRepository;
     @Override
-    public List<ProductLine> getAllProductLines() {
-        return productLineRepository.listAll();
+    public List<ProductLine> getAllProductLines(Integer start, Integer limit) {
+        return productLineRepository.listAll(start, limit);
     }
 }

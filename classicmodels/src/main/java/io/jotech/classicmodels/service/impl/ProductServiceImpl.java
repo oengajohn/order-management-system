@@ -12,7 +12,7 @@ public class ProductServiceImpl implements ProductService {
     @Inject
     private ProductRepository productRepository;
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.listAll();
+    public List<Product> getAllProducts(Integer start, Integer limit) {
+        return productRepository.listAll(start, limit);
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import io.jotech.classicmodels.entity.Office;
 
 public interface OfficeService {
-    List<Office> getAllOffices();
+    List<Office> getAllOffices(Integer start, Integer limit);
 
     Office getOffice(String officeCode);
 

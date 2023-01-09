@@ -2,9 +2,11 @@ package io.jotech.classicmodels.rest;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -20,8 +22,9 @@ public class Products {
     private ProductService productService;
 
     @GET
-    public Response getAllProducts() {
-        var allProducts = productService.getAllProducts();
+    public Response getAllProducts(@DefaultValue("0") @QueryParam("start") Integer start,
+                                   @DefaultValue ("10") @QueryParam("limit") Integer limit) {
+        var allProducts = productService.getAllProducts(start,limit);
         var res = GridResponse.<Product>builder()
                 .rows(allProducts)
                 .success(true)

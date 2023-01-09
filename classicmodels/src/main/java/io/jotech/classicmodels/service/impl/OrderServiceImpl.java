@@ -13,7 +13,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.listAll();
+    public List<Order> getAllOrders(Integer start, Integer limit) {
+        return orderRepository.listAll(start,limit);
     }
 }
