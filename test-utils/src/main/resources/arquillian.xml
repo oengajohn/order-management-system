@@ -10,7 +10,7 @@
     <!-- Configuration to be used when the WildFly managed profile is active -->
     <container qualifier="wildfly-managed">
         <configuration>
-            <property name="jbossHome">${jbossHome:target/wildfly-preview-27.0.0.Final}</property>
+<!--            <property name="jbossHome">${jbossHome:target/wildfly-preview-27.0.0.Final}</property>-->
             <property name="serverConfig">standalone-full.xml</property>
         </configuration>
     </container>
