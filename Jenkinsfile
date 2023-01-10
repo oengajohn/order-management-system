@@ -12,14 +12,16 @@ pipeline {
         }
         stage('Test') {
             steps {
-                //sh 'mvn clean verify -Parq-wildfly-managed'
-                echo("Running unist tests")
-                sh 'mvn test'
+                echo("Running Integration tests")
+                sh 'mvn clean verify -Parq-wildfly-managed'
+                echo("Running Unit tests")
+                sh 'mvn clean test -Punit-test'
             }
             post {
                 always {
-                    // junit 'target/surefire-reports/*.xml'
-                    echo("Show junit reports results")
+                    junit 'target/surefire-reports/*.xml'
+                    junit 'target/surefire-reports/*.xml'
+
                 }
             }
         }
