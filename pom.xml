@@ -517,7 +517,9 @@
                 </plugins>
             </build>
         </profile>
+
         <profile>
+
 
             <!-- An optional Arquillian testing profile that executes tests in your
                 WildFly instance -->
@@ -526,7 +528,7 @@
             <!-- Run with: mvn clean verify -Parq-wildfly-managed -->
             <id>arq-wildfly-managed</id>
             <properties>
-                <skip.unit.tests>false</skip.unit.tests>
+                <skip.unit.tests>true</skip.unit.tests>
                 <skip.integration.tests>false</skip.integration.tests>
                 <serverProfile>standalone-full.xml</serverProfile>
                 <serverRoot>${project.build.directory}/wildfly-${wildfly.version}</serverRoot>
@@ -561,17 +563,16 @@
             <build>
                 <testResources>
                     <testResource>
-                        <directory>src/test/arq-wildfly-managed</directory>
+                        <directory>src/test/resources</directory>
                         <includes>
                             <include>*</include>
                         </includes>
                     </testResource>
                 </testResources>
+
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>${maven-dependency-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>unpack</id>
@@ -598,9 +599,9 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>${maven-failsafe-plugin.version}</version>
                         <configuration>
-<!--                            <environmentVariables>-->
-<!--                                <JBOSS_HOME>${project.build.directory}/wildfly-preview-${wildfly.version}</JBOSS_HOME>-->
-<!--                            </environmentVariables>-->
+                            <environmentVariables>
+                                <JBOSS_HOME>${project.build.directory}/wildfly-preview-${wildfly.version}</JBOSS_HOME>
+                            </environmentVariables>
                             <systemPropertyVariables>
                                 <arquillian.launch>wildfly-managed</arquillian.launch>
                                 <serverConfig>standalone-full.xml</serverConfig>
@@ -658,7 +659,7 @@
             <build>
                 <testResources>
                     <testResource>
-                        <directory>src/test/arq-wildfly-remote</directory>
+                        <directory>src/test/resources</directory>
                         <includes>
                             <include>*</include>
                         </includes>
@@ -712,7 +713,7 @@
             <build>
                 <testResources>
                     <testResource>
-                        <directory>src/test/arq-wildfly-embedded</directory>
+                        <directory>src/test/resources</directory>
                         <includes>
                             <include>*</include>
                         </includes>
@@ -793,7 +794,7 @@
             <build>
                 <testResources>
                     <testResource>
-                        <directory>src/test/arq-wildfly-bootable-jar</directory>
+                        <directory>src/test/resources</directory>
                         <includes>
                             <include>*</include>
                         </includes>

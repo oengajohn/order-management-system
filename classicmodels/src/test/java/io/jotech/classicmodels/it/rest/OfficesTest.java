@@ -1,4 +1,4 @@
-package io.jotech.classicmodels.rest;
+package io.jotech.classicmodels.it.rest;
 
 import java.net.URL;
 import org.assertj.core.api.Assertions;
