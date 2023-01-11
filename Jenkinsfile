@@ -7,6 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                sh 'mvn -B -DskipTests clean package'
+               archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
 
             }
         }
@@ -19,9 +20,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
-                    junit 'target/surefire-reports/*.xml'
-
+                    junit 'target/**.xml'
                 }
             }
         }
