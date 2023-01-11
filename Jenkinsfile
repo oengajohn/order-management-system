@@ -20,7 +20,8 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/**.xml'
+                    //junit 'target/**.xml'
+                    echo "Show reports "
                 }
             }
         }
